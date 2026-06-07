@@ -10,3 +10,16 @@ body {
   font-family: sans-serif;
   min-height: 100vh;
 }
+
+.session-pirate {
+  --session-accent: #eab308;
+  --session-accent-hover: #ca8a04;
+  --session-accent-text: #000000;
+}
+
+.session-marine {
+  --session-accent: #1d4ed8;
+  --session-accent-hover: #1e40af;
+  --session-accent-text: #ffffff;
+}
+

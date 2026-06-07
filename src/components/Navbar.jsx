@@ -1,4 +1,17 @@
+import { useContext } from 'react'
+import { SessionContext } from '../context/SessionContext'
+import NavButton from './NavButton'
+
 function Navbar({ currentPage, onNavigate }) {
+  const { session, endSession } = useContext(SessionContext)
+
+  const sessionLabel = session === 'pirate' ? '☠️ Pirata' : '⚓ Marino'
+
+  const handleLogout = () => {
+    endSession()
+    onNavigate('login')
+  }
+
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 flex items-center justify-between">
       <div className="text-xl font-bold tracking-wide">
@@ -6,27 +19,26 @@ function Navbar({ currentPage, onNavigate }) {
       </div>
 
       <div className="flex gap-4">
-        <button
+        <NavButton
+          isActive={currentPage === 'home'}
           onClick={() => onNavigate('home')}
-          className={`px-4 py-2 rounded transition-colors ${
-            currentPage === 'home'
-              ? 'bg-white text-gray-900 font-semibold'
-              : 'hover:bg-gray-700'
-          }`}
         >
           Inicio
-        </button>
+        </NavButton>
 
-        <button
+        <NavButton
+          isActive={currentPage === 'about'}
           onClick={() => onNavigate('about')}
-          className={`px-4 py-2 rounded transition-colors ${
-            currentPage === 'about'
-              ? 'bg-white text-gray-900 font-semibold'
-              : 'hover:bg-gray-700'
-          }`}
         >
           Acerca de
-        </button>
+        </NavButton>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <span className="text-sm font-semibold">{sessionLabel}</span>
+        <NavButton onClick={handleLogout}>
+          Salir
+        </NavButton>
       </div>
     </nav>
   )

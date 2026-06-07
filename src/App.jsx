@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import SessionProvider, { SessionContext } from './context/SessionContext'
 import Layout from './components/Layout'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 
-function App() {
+function AppContent() {
+  const { session } = useContext(SessionContext)
   const [currentPage, setCurrentPage] = useState('login')
 
-  if (currentPage === 'login') {
+  if (!session) {
     return <LoginPage onNavigate={setCurrentPage} />
   }
 
@@ -23,12 +25,23 @@ function App() {
   }
 
   return (
-    <Layout currentPage={currentPage} onNavigate={setCurrentPage}>
-      {renderPage()}
-    </Layout>
+    <div className={session === 'pirate' ? 'session-pirate' : 'session-marine'}>
+      <Layout currentPage={currentPage} onNavigate={setCurrentPage}>
+        {renderPage()}
+      </Layout>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <SessionProvider>
+      <AppContent />
+    </SessionProvider>
   )
 }
 
 export default App
+
 
 
