@@ -8,7 +8,6 @@ function Modal({ isOpen, onClose, title, children }) {
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full overflow-hidden flex flex-col max-h-[90vh]">
         <div className="flex justify-between items-center p-4 border-b border-gray-200">
           <h2 className="text-xl font-bold">{title}</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-black font-bold text-xl px-2 cursor-pointer">&times;</button>
         </div>
         <div className="p-4 overflow-y-auto">
           {children}

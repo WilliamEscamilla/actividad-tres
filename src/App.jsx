@@ -2,9 +2,11 @@ import { useState } from 'react'
 import SessionProvider from './context/SessionProvider'
 import useSession from './hooks/useSession'
 import Layout from './components/Layout'
+import { Suspense, lazy } from 'react'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
-import AboutPage from './pages/AboutPage'
+
+const AboutPage = lazy(() => import('./pages/AboutPage'))
 
 function AppContent() {
   const { session } = useSession()
@@ -29,7 +31,9 @@ function AppContent() {
         <LoginPage onNavigate={setCurrentPage} />
       ) : (
         <Layout currentPage={currentPage} onNavigate={setCurrentPage}>
-          {renderPage()}
+          <Suspense fallback={<div className="flex justify-center py-20"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div></div>}>
+            {renderPage()}
+          </Suspense>
         </Layout>
       )}
     </div>

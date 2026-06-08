@@ -15,6 +15,7 @@ Muestra cards con los integrantes de la tripulación con información y acciones
 
 src/
 ├── components/
+│   ├── AbilityList.jsx
 │   ├── Button.jsx
 │   ├── CharacterCard.jsx
 │   ├── CharacterDetails.jsx
@@ -22,11 +23,13 @@ src/
 │   ├── LoginView.jsx
 │   ├── Modal.jsx
 │   ├── NavButton.jsx
-│   └── Navbar.jsx
+│   ├── Navbar.jsx
+│   └── WeaknessList.jsx
 ├── containers/
 │   └── CharacterListContainer.jsx
 ├── context/
-│   └── SessionContext.jsx
+│   ├── SessionContext.js
+│   └── SessionProvider.jsx
 ├── hocs/
 │   └── withSession.jsx
 ├── hooks/
@@ -70,7 +73,7 @@ Las funciones de `LoginPage`: Es un contenedor que accede y se encarga de inicia
 - Si el usuario **no tiene una sesión activa**, bloquea la visualización del componente original y en su lugar muestra una pantalla de "Acceso Denegado".
 - Si el usuario **sí tiene sesión**, renderiza el componente original pasándole intactas todas sus propiedades (`<WrappedComponent {...props} />`).
 
-Este patrón se usa actualmente para envolver y proteger `HomePage` (y `AboutPage`). Su mayor ventaja es que nos permite agregar esta capa de seguridad a cualquier pantalla de la app sin tener que escribir la lógica de validación de sesión dentro de cada página.
+Este patrón se usa actualmente para envolver y proteger `HomePage` y `AboutPage`. Su mayor ventaja es que nos permite agregar esta capa de seguridad a cualquier pantalla de la app sin tener que escribir la lógica de validación de sesión dentro de cada página.
 
 ### 4. Custom Hooks
 
@@ -80,3 +83,9 @@ Este patrón se usa actualmente para envolver y proteger `HomePage` (y `AboutPag
 ### 5. Render Props
 
 Implementado en el componente `CharacterDetails` y utilizado por el `CharacterListContainer`. `CharacterDetails` pinta la cabecera estándar de un tripulante (foto, nombre y rol) y luego ejecuta una función recibida a través de la prop `render(character)`. Esto permite que el componente padre decida de forma dinámica qué contenido inyectar en la parte inferior del modal (la lista de habilidades o debilidades) haciéndolo extremadamente reutilizable.
+
+### 6. Code Splitting
+
+El Code Splitting fue implementado mediante `React.lazy` y `<Suspense>` para optimizar la carga inicial de la aplicación. Lo aplicamos de forma global en `App.jsx` para la página `AboutPage` (asegurando que su código solo se descargue al navegar a ella), y a nivel de componente en `CharacterListContainer.jsx` para cargar de forma perezosa las listas de detalles (`AbilityList` y `WeaknessList`) dentro del modal. Esto sirve para reducir el tamaño de la carga inicial y mejora los tiempos de respuesta de la interfaz.
+
+

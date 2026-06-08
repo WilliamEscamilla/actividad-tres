@@ -1,3 +1,5 @@
+import withSession from '../hocs/withSession'
+
 function AboutPage() {
   return (
     <div className="max-w-2xl mx-auto">
@@ -11,4 +13,5 @@ function AboutPage() {
   )
 }
 
-export default AboutPage
+export default withSession(AboutPage)
+

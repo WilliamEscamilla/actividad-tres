@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import useFetch from '../hooks/useFetch'
 import useSession from '../hooks/useSession'
 import { getCharacters } from '../services/api'
 import CharacterCard from '../components/CharacterCard'
 import Modal from '../components/Modal'
 import CharacterDetails from '../components/CharacterDetails'
+
+const AbilityList = lazy(() => import('../components/AbilityList'))
+const WeaknessList = lazy(() => import('../components/WeaknessList'))
 
 function CharacterListContainer() {
   const { session } = useSession()
@@ -95,25 +98,15 @@ function CharacterListContainer() {
           render={(char) => {
             if (session === 'pirate') {
               return (
-                <div>
-                  <h4 className="font-bold mb-2">Habilidades Conocidas:</h4>
-                  <ul className="list-disc pl-5">
-                    {char.abilities?.map((ability, idx) => (
-                      <li key={idx} className="mb-1">{ability}</li>
-                    ))}
-                  </ul>
-                </div>
+                <Suspense fallback={<div className="animate-pulse h-10 bg-gray-200 rounded w-full"></div>}>
+                  <AbilityList character={char} />
+                </Suspense>
               )
             } else {
               return (
-                <div>
-                  <h4 className="font-bold mb-2 text-red-600">Puntos Débiles (Clasificado):</h4>
-                  <ul className="list-disc pl-5">
-                    {char.weaknesses?.map((weakness, idx) => (
-                      <li key={idx} className="mb-1">{weakness}</li>
-                    ))}
-                  </ul>
-                </div>
+                <Suspense fallback={<div className="animate-pulse h-10 bg-red-100 rounded w-full"></div>}>
+                  <WeaknessList character={char} />
+                </Suspense>
               )
             }
           }}
