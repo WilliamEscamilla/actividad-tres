@@ -66,11 +66,13 @@ function CharacterListContainer() {
       return {
         label1: 'Cumpleaños',
         value1: character.birthday,
+        bountyStyle: { color: 'var(--session-accent)' },
       }
     }
     return {
       label1: 'Última ubicación 📍',
       value1: character.lastKnownLocation,
+      bountyStyle: undefined,
     }
   }
 
@@ -81,7 +83,6 @@ function CharacterListContainer() {
           <CharacterCard
             key={character.id}
             character={character}
-            session={session}
             sessionData={getSessionData(character)}
             actionConfig={getActionConfig(character)}
           />

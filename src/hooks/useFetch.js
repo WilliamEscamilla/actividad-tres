@@ -5,18 +5,11 @@ function useFetch(fetchFn, dependencies = []) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const [prevDeps, setPrevDeps] = useState(dependencies)
-
-  const depsChanged = dependencies.some((dep, idx) => dep !== prevDeps[idx])
-  if (depsChanged) {
-    setPrevDeps(dependencies)
-    setLoading(true)
-    setError(null)
-    setData(null)
-  }
-
   useEffect(() => {
     let isMounted = true
+    setLoading(true)
+    setData(null)
+    setError(null)
 
     fetchFn()
       .then((result) => {

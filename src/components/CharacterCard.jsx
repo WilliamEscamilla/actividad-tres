@@ -1,6 +1,6 @@
 import Button from './Button'
 
-function CharacterCard({ character, session, sessionData, actionConfig }) {
+function CharacterCard({ character, sessionData, actionConfig }) {
   return (
     <div className="rounded-lg border-black border-2 flex flex-col h-full">
       <img
@@ -22,7 +22,7 @@ function CharacterCard({ character, session, sessionData, actionConfig }) {
           <p className="text-xs uppercase tracking-wider mb-1">Recompensa</p>
           <p
             className="text-xl font-bold tracking-widest"
-            style={session === 'pirate' ? { color: 'var(--session-accent)' } : undefined}
+            style={sessionData?.bountyStyle}
           >
             ฿ {character.bounty}
           </p>
