@@ -106,7 +106,7 @@ export const charactersData = [
     bounty: "394,000,000",
     devilFruitName: "Ninguna",
     avatarSrc: "/franky.png",
-    description: "Carpintero naval y genio de la tecnología cíborg.",
+    description: "Carpintero naval y genio de la tecnología cyborg.",
     role: "Carpintero",
     abilities: ["General Franky", "Láseres de Vegapunk", "Modificación cíborg", "Reparación naval"],
     weaknesses: ["Dependencia de suministro de Cola", "Espalda vulnerable", "Tamaño voluminoso"]

@@ -1,6 +1,8 @@
-function CharacterCard({ character, session, sessionData }) {
+import Button from './Button'
+
+function CharacterCard({ character, session, sessionData, actionConfig }) {
   return (
-    <div className="rounded-lg border-black border-2">
+    <div className="rounded-lg border-black border-2 flex flex-col h-full">
       <img
         src={character.avatarSrc}
         alt={character.englishName}
@@ -31,6 +33,18 @@ function CharacterCard({ character, session, sessionData }) {
             <p>
               <strong>{sessionData.label1}:</strong> {sessionData.value1}
             </p>
+          </div>
+        )}
+
+        {actionConfig && (
+          <div className="mt-auto">
+            <Button 
+              variant={actionConfig.variant} 
+              onClick={actionConfig.onClick} 
+              className="px-4 py-2 rounded-lg w-full text-sm mt-4"
+            >
+              {actionConfig.text}
+            </Button>
           </div>
         )}
       </div>
