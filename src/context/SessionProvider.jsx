@@ -1,6 +1,5 @@
-import { createContext, useState } from 'react'
-
-export const SessionContext = createContext(null)
+import { useState } from 'react'
+import { SessionContext } from './SessionContext.js'
 
 function SessionProvider({ children }) {
   const [session, setSession] = useState(null) // Esto puede valer null, 'pirate' o 'marine'

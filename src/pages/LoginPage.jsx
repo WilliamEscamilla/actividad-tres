@@ -1,9 +1,8 @@
-import { useContext } from 'react'
-import { SessionContext } from '../context/SessionContext'
+import useSession from '../hooks/useSession'
 import LoginView from '../components/LoginView'
 
 function LoginPage({ onNavigate }) {
-  const { startSession } = useContext(SessionContext)
+  const { startSession } = useSession()
 
   const handleSelectPirate = () => {
     startSession('pirate')

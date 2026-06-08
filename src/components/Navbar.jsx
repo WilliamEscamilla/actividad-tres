@@ -1,9 +1,8 @@
-import { useContext } from 'react'
-import { SessionContext } from '../context/SessionContext'
+import useSession from '../hooks/useSession'
 import NavButton from './NavButton'
 
 function Navbar({ currentPage, onNavigate }) {
-  const { session, endSession } = useContext(SessionContext)
+  const { session, endSession } = useSession()
 
   const sessionLabel = session === 'pirate' ? '☠️ Pirata' : '⚓ Marino'
 
